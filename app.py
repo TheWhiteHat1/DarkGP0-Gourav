@@ -13,7 +13,7 @@ def home():
 
     return jsonify({
         "status": "ok",
-        "message": "Enter Instagram username to get info 🚀\nExample: /?iginfo=gouravparajapt"
+        "message": "Enter Instagram username to get info 🚀\n"
     })
 
 @app.route('/lookup', methods=['GET'])
