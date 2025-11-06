@@ -9,22 +9,22 @@ app = Flask(__name__)
 def home():
     return jsonify({
         "status": "ok",
-        "message": "Dark OSINT Proxy running on Render 🚀"
+        "message": "Enter Instagram username to get info 🚀"
     })
 
 @app.route('/lookup', methods=['GET'])
 def lookup():
-    phone = request.args.get('mobile', '').strip()
+    username = request.args.get('iginfo', '').strip()
 
-    # Validate phone number (10 digits)
-    if not re.fullmatch(r'\d{10}', phone):
-        return jsonify({"error": "Please provide a valid 10-digit phone number"}), 400
+    # Validate Instagram username (letters, numbers, dots, underscores)
+    if not re.fullmatch(r'[A-Za-z0-9._]{1,30}', username):
+        return jsonify({"error": "Please provide a valid Instagram username"}), 400
 
-    upstream_url = f"https://seller-ki-mkc.taitanx.workers.dev/?mobile={phone}"
+    upstream_url = f"https://info.taitanx.workers.dev/?iginfo={username}"
 
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (compatible; DarkOSINTProxy/1.0)",
+            "User-Agent": "Mozilla/5.0 (compatible; InstaInfoProxy/1.0)",
             "Accept": "application/json"
         }
 
